@@ -13,6 +13,17 @@ import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import GetQuote from "./pages/GetQuote";
 import NotFound from "./pages/NotFound";
+// Service Landing Pages
+import WebDesign from "./pages/WebDesign";
+import DigitalMarketing from "./pages/DigitalMarketing";
+import WebSupport from "./pages/WebSupport";
+import AIAutomation from "./pages/AIAutomation";
+import CustomSoftware from "./pages/CustomSoftware";
+// Blog
+import Blog from "./pages/Blog";
+import BlogPost1 from "./pages/BlogPost1";
+import BlogPost2 from "./pages/BlogPost2";
+import BlogPost3 from "./pages/BlogPost3";
 
 const queryClient = new QueryClient();
 
@@ -27,17 +38,17 @@ function AnimatedRoutes() {
 
   const pageMotionProps = shouldReduceMotion
     ? {
-        initial: false,
-        animate: { opacity: 1 },
-        exit: { opacity: 1 },
-        transition,
-      }
+      initial: false,
+      animate: { opacity: 1 },
+      exit: { opacity: 1 },
+      transition,
+    }
     : {
-        initial: { opacity: 0, y: 12 },
-        animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -12 },
-        transition,
-      };
+      initial: { opacity: 0, y: 12 },
+      animate: { opacity: 1, y: 0 },
+      exit: { opacity: 0, y: -12 },
+      transition,
+    };
 
   const wrap = (node: ReactNode) => (
     <motion.div {...pageMotionProps} className="min-h-[calc(100vh-80px)]">
@@ -48,13 +59,25 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait" initial={false}>
       <Routes location={location} key={location.pathname}>
+        {/* Core Pages */}
         <Route path="/" element={wrap(<Index />)} />
         <Route path="/about" element={wrap(<About />)} />
         <Route path="/services" element={wrap(<Services />)} />
         <Route path="/careers" element={wrap(<Careers />)} />
         <Route path="/contact" element={wrap(<Contact />)} />
         <Route path="/get-quote" element={wrap(<GetQuote />)} />
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        {/* Service Landing Pages */}
+        <Route path="/web-design" element={wrap(<WebDesign />)} />
+        <Route path="/digital-marketing" element={wrap(<DigitalMarketing />)} />
+        <Route path="/web-support" element={wrap(<WebSupport />)} />
+        <Route path="/ai-automation" element={wrap(<AIAutomation />)} />
+        <Route path="/custom-software" element={wrap(<CustomSoftware />)} />
+        {/* Blog */}
+        <Route path="/blog" element={wrap(<Blog />)} />
+        <Route path="/blog/ai-website-builder-vs-web-design-agency" element={wrap(<BlogPost1 />)} />
+        <Route path="/blog/digital-marketing-trends-2026" element={wrap(<BlogPost2 />)} />
+        <Route path="/blog/automation-save-business-time" element={wrap(<BlogPost3 />)} />
+        {/* Catch-all */}
         <Route path="*" element={wrap(<NotFound />)} />
       </Routes>
     </AnimatePresence>

@@ -393,16 +393,23 @@
     animation: energy-pulse 3s ease-in-out infinite;
   }
 
-  /* Cursor Glow Effect */
+  /* Cursor Glow Effect – matches spec exactly */
   .cursor-glow {
     position: fixed;
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    background: radial-gradient(circle, hsl(255 100% 59% / 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, #9f6bff33 0%, transparent 60%);
     pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease-out;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: left 0.05s linear, top 0.05s linear;
+  }
+
+  @keyframes pulseArc {
+    0% { stroke-dashoffset: 1200; opacity: 0; }
+    40% { opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
   }
 
   /* Enhanced fade in animation */

@@ -1,36 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
+/**
+ * CursorGlow – matches the spec exactly.
+ * Uses direct left/top positioning (not transform offset) so the
+ * radial gradient is perfectly centred on the cursor.
+ */
 export default function CursorGlow() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
-    const updatePosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    const glow = document.querySelector('.cursor-glow') as HTMLElement | null;
+
+    const moveGlow = (e: MouseEvent) => {
+      if (glow) {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      }
     };
 
-    const handleMouseEnter = () => setIsVisible(true);
-    const handleMouseLeave = () => setIsVisible(false);
-
-    window.addEventListener('mousemove', updatePosition);
-    window.addEventListener('mouseenter', handleMouseEnter);
-    window.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      window.removeEventListener('mousemove', updatePosition);
-      window.removeEventListener('mouseenter', handleMouseEnter);
-      window.removeEventListener('mouseleave', handleMouseLeave);
-    };
+    window.addEventListener('mousemove', moveGlow);
+    return () => window.removeEventListener('mousemove', moveGlow);
   }, []);
 
-  if (!isVisible) return null;
-
-  return (
-    <div
-      className="cursor-glow"
-      style={{
-        transform: `translate(${position.x - 150}px, ${position.y - 150}px)`,
-      }}
-    />
-  );
+  return <div className="cursor-glow" />;
 }

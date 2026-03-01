@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { Target, Eye, Award, Shield, Heart, BookOpen } from "lucide-react";
+import { Target, Eye, Award, Shield, Heart, BookOpen, ArrowRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import SectionHeading from "@/components/ui/SectionHeading";
 import AnimatedBlobs from "@/components/ui/AnimatedBlobs";
-import CTABanner from "@/components/home/CTABanner";
 import LazySection from "@/components/ui/LazySection";
-import logo from "@/assets/grituz-logo.png";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const coreValues = [
   {
@@ -34,7 +34,7 @@ export default function About() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-hero">
+      <section className="relative pt-32 pb-24 overflow-hidden bg-gradient-hero">
         <AnimatedBlobs />
         <div className="container-custom relative z-10">
           <motion.div
@@ -43,75 +43,79 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-primary bg-secondary rounded-full">
+            <span className="inline-block px-4 py-1.5 mb-5 text-sm font-medium text-primary bg-secondary rounded-full">
               About Us
             </span>
             <h1 className="heading-xl mb-6">
               Redefining <span className="text-primary font-extrabold">Digital Excellence</span>
             </h1>
-            <p className="body-lg">
-              For over 15 years, Grituz has been at the forefront of web design
-              and digital marketing, helping businesses establish powerful
-              online presence.
+            <p className="body-lg text-muted-foreground leading-relaxed">
+              Grituz helps businesses build strong digital foundations through strategic design,
+              marketing, and technology solutions that drive measurable growth.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Intro Section */}
+      {/* Who We Are */}
       <LazySection>
         <section className="section-padding">
           <div className="container-custom">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+            {/* Intro text */}
+            <div className="max-w-3xl mx-auto text-center mb-16">
+              <motion.h2
+                className="heading-lg mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="relative">
-                  <div className="absolute -inset-4 bg-primary/5 rounded-3xl rotate-3" />
-                  <div className="relative bg-foreground rounded-3xl p-16 flex items-center justify-center">
-                    <img src={logo} alt="Grituz" className="w-64 h-auto" loading="lazy" />
-                  </div>
-                </div>
-              </motion.div>
+                Who We Are
+              </motion.h2>
+              <motion.p
+                className="body-md text-muted-foreground leading-relaxed mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                Grituz is a digital solutions company helping small and medium businesses build,
+                scale, and optimize their online presence. We combine strategic thinking, creative
+                design, and reliable technology to deliver digital systems that drive sustainable growth.
+              </motion.p>
+              <motion.p
+                className="body-md text-muted-foreground leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+              >
+                Our team of designers, developers, and marketing specialists work together to deliver
+                exceptional digital solutions that create real, measurable business results.
+              </motion.p>
+            </div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="space-y-6"
-              >
-                <h2 className="heading-lg">Who We Are</h2>
-                <p className="body-md">
-                  Grituz is a premier web design and digital marketing agency
-                  based in Bangalore, India. Founded in 2010, we've grown from a
-                  small team of passionate designers to a full-service digital
-                  agency serving clients globally.
-                </p>
-                <p className="body-md">
-                  Our team comprises talented designers, skilled developers,
-                  creative marketers, and strategic thinkers who work together to
-                  deliver exceptional digital solutions that drive real business
-                  results.
-                </p>
-                <div className="grid grid-cols-3 gap-6 pt-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary">15+</div>
-                    <div className="text-sm text-muted-foreground">Years</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary">500+</div>
-                    <div className="text-sm text-muted-foreground">Projects</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary">200+</div>
-                    <div className="text-sm text-muted-foreground">Clients</div>
-                  </div>
-                </div>
-              </motion.div>
+            {/* Stats Row */}
+            <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
+              {[
+                { value: "15+", label: "Years of Experience" },
+                { value: "40+", label: "Projects Delivered" },
+                { value: "25+", label: "Clients Served" },
+              ].map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  className="glass-card p-6 text-center hover:shadow-glow transition-all duration-300"
+                  style={{ borderColor: "rgba(139,92,246,0.15)" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  whileHover={{ y: -4 }}
+                >
+                  <div className="text-4xl font-black text-primary mb-1">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
@@ -119,7 +123,7 @@ export default function About() {
 
       {/* Mission & Vision */}
       <LazySection>
-        <section className="section-padding bg-gradient-section">
+        <section className="section-padding bg-gradient-to-b from-secondary/20 to-background">
           <div className="container-custom">
             <div className="grid md:grid-cols-2 gap-8">
               <motion.div
@@ -128,16 +132,15 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
                 className="glass-card p-8"
+                style={{ borderColor: "rgba(139,92,246,0.15)" }}
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
                   <Target className="w-7 h-7 text-primary" />
                 </div>
                 <h3 className="heading-md mb-4">Our Mission</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  To help businesses leverage the power of the internet
-                  effectively through affordable, tailored digital solutions that
-                  drive growth and create lasting impact in the digital
-                  landscape.
+                  To help growing businesses build impactful digital experiences through strategic design,
+                  marketing, and intelligent technology solutions that drive measurable growth.
                 </p>
               </motion.div>
 
@@ -147,15 +150,15 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="glass-card p-8"
+                style={{ borderColor: "rgba(139,92,246,0.15)" }}
               >
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
                   <Eye className="w-7 h-7 text-primary" />
                 </div>
                 <h3 className="heading-md mb-4">Our Vision</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  To become a global leader in innovative web design and digital
-                  marketing services, setting new standards of excellence and
-                  helping businesses worldwide achieve their full potential.
+                  To be a trusted digital partner for modern businesses, known for clarity, creativity,
+                  and performance-driven results.
                 </p>
               </motion.div>
             </div>
@@ -181,13 +184,15 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="glass-card-hover p-6 text-center"
+                  whileHover={{ y: -4 }}
+                  className="glass-card p-6 text-center hover:shadow-glow transition-all duration-300"
+                  style={{ borderColor: "rgba(139,92,246,0.12)" }}
                 >
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <value.icon className="w-7 h-7 text-primary" />
                   </div>
                   <h3 className="font-semibold text-lg mb-2">{value.title}</h3>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
                     {value.description}
                   </p>
                 </motion.div>
@@ -197,8 +202,44 @@ export default function About() {
         </section>
       </LazySection>
 
+      {/* CTA – Glass Card */}
       <LazySection>
-        <CTABanner />
+        <section className="section-padding bg-gradient-to-b from-background to-secondary/20">
+          <div className="container-custom">
+            <motion.div
+              className="glass-card p-12 text-center max-w-4xl mx-auto hover:shadow-glow transition-all duration-300 relative overflow-hidden"
+              style={{ borderColor: "rgba(139,92,246,0.18)" }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl" />
+              <div className="relative z-10 space-y-6">
+                <h2 className="heading-lg text-gradient">
+                  Ready to Build Your Digital Presence?
+                </h2>
+                <p className="body-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                  Let's discuss your goals and explore the right strategy for your business.
+                  We'll help you move forward with clarity and confidence.
+                </p>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    className="bg-gradient-cta hover:shadow-glow transition-all duration-300"
+                    asChild
+                  >
+                    <Link to="/contact">
+                      Book a Free Consultation
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Link>
+                  </Button>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
       </LazySection>
     </Layout>
   );

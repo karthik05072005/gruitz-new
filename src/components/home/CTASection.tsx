@@ -1,80 +1,144 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
+/**
+ * CTASection – Full-width glass-card CTA before footer.
+ * Same card design language as the rest of the site.
+ * Single primary button, centered layout, subtle hover animation.
+ */
 export default function CTASection() {
   return (
-    <section className="section-padding bg-gradient-to-b from-background to-secondary/20">
+    <section
+      className="section-padding"
+      style={{ background: "linear-gradient(180deg, #110c22 0%, #0d0818 100%)" }}
+    >
       <div className="container-custom">
-        <motion.div 
-          className="glass-card p-12 text-center max-w-4xl mx-auto hover:shadow-glow transition-all duration-300"
-          initial={{ opacity: 0, y: 30 }}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          style={{
+            position: "relative",
+            maxWidth: "860px",
+            margin: "0 auto",
+            padding: "3.5rem 3rem",
+            textAlign: "center",
+            background: "rgba(109,40,217,0.07)",
+            border: "1px solid rgba(139,92,246,0.18)",
+            borderRadius: "20px",
+            backdropFilter: "blur(12px)",
+            overflow: "hidden",
+          }}
         >
-          {/* Content */}
-          <motion.div 
-            className="space-y-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <motion.h2 
-              className="heading-lg text-gradient"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+          {/* Top-edge shimmer line */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0, left: "10%", right: "10%",
+              height: "1px",
+              background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.45), transparent)",
+            }}
+          />
+
+          {/* Corner glow blobs */}
+          <div
+            style={{
+              position: "absolute",
+              width: "260px", height: "260px",
+              top: "-80px", right: "-80px",
+              background: "radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)",
+              filter: "blur(40px)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              width: "200px", height: "200px",
+              bottom: "-60px", left: "-60px",
+              background: "radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%)",
+              filter: "blur(35px)",
+              pointerEvents: "none",
+            }}
+          />
+
+          <div className="relative z-10 space-y-5">
+            <motion.h2
+              style={{
+                fontSize: "clamp(1.65rem, 3vw, 2.4rem)",
+                fontWeight: 800,
+                lineHeight: 1.2,
+                letterSpacing: "-0.02em",
+                background: "linear-gradient(90deg, #e9d5ff 0%, #a78bfa 60%, #8b5cf6 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
             >
               Ready to Strengthen Your Digital Presence?
             </motion.h2>
-            
-            <p className="body-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              Let's discuss your goals and explore the right strategy for your business. Whether you need a website, 
-              branding, marketing, or automation, we'll help you move forward with clarity and confidence.
-            </p>
-          </motion.div>
 
-          {/* CTA Button */}
-          <motion.div 
-            className="pt-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button variant="hero" size="lg" className="bg-gradient-cta hover:shadow-glow transition-all duration-300" asChild>
-                <Link to="/contact">
+            <motion.p
+              style={{
+                color: "rgba(196,181,253,0.65)",
+                fontSize: "0.97rem",
+                lineHeight: 1.72,
+                maxWidth: "560px",
+                margin: "0 auto",
+              }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.18 }}
+            >
+              Let's discuss your goals and explore the right strategy for your business. Whether you need
+              a website, branding, marketing, or automation, we'll help you move forward with clarity and
+              confidence.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.26 }}
+              style={{ paddingTop: "0.5rem" }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                style={{ display: "inline-block" }}
+              >
+                <Link
+                  to="/contact"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "14px 36px",
+                    borderRadius: "8px",
+                    fontWeight: 600,
+                    fontSize: "0.95rem",
+                    background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
+                    color: "#fff",
+                    boxShadow: "0 4px 20px rgba(109,40,217,0.35)",
+                    transition: "box-shadow 0.2s",
+                    textDecoration: "none",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 6px 28px rgba(109,40,217,0.55)")}
+                  onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 4px 20px rgba(109,40,217,0.35)")}
+                >
                   Book a Free Consultation
-                  <ArrowRight className="w-5 h-5 ml-2" />
+                  <ArrowRight style={{ width: 16, height: 16 }} />
                 </Link>
-              </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
-
-          {/* Decorative elements */}
-          <motion.div 
-            className="absolute top-4 left-4 w-2 h-2 rounded-full bg-primary/50"
-            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.div 
-            className="absolute top-4 right-4 w-2 h-2 rounded-full bg-primary/50"
-            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          />
-          <motion.div 
-            className="absolute bottom-4 left-4 w-2 h-2 rounded-full bg-primary/50"
-            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          />
-          <motion.div 
-            className="absolute bottom-4 right-4 w-2 h-2 rounded-full bg-primary/50"
-            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          />
+          </div>
         </motion.div>
       </div>
     </section>

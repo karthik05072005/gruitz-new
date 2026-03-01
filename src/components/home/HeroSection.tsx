@@ -1,94 +1,351 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import AuroraBackground from "@/components/ui/AuroraBackground";
-import EnergyFieldAnimation from "@/components/ui/EnergyFieldAnimation";
+import { ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
+/* ─────────────────────────────────────────────
+   Energy Arc SVG – Animated electric arcs
+   Matches spec: pulseArc keyframe, colours, glow filter
+────────────────────────────────────────────── */
+interface EnergyArc {
+  id: number;
+  color: string;
+  duration: number;
+  delay: number;
+  path: string;
+}
+
+function EnergyFieldSVG() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [arcs, setArcs] = useState<EnergyArc[]>([]);
+
+  const colors = ["#9f6bff", "#7a5cff", "#b794f6", "#818cf8"];
+
+  const generateRandomPath = (width: number, height: number): string => {
+    const r = () => Math.random();
+    return `M ${r() * width} ${r() * height} C ${r() * width} ${r() * height}, ${r() * width} ${r() * height}, ${r() * width} ${r() * height}`;
+  };
+
+  useEffect(() => {
+    const update = () => {
+      if (!containerRef.current) return;
+      const { width, height } = containerRef.current.getBoundingClientRect();
+      const newArcs: EnergyArc[] = Array.from({ length: 8 }, (_, i) => ({
+        id: Date.now() + i,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        duration: 3 + Math.random() * 4,
+        delay: Math.random() * 2,
+        path: generateRandomPath(width, height),
+      }));
+      setArcs(newArcs);
+    };
+
+    update();
+    const interval = setInterval(update, 2000); // regenerate every 2s per spec
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+      style={{ zIndex: 1 }}
+    >
+      <svg className="absolute inset-0 w-full h-full" style={{ filter: "blur(0.5px)" }}>
+        <defs>
+          <filter id="heroGlow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        {arcs.map((arc) => (
+          <g key={arc.id}>
+            <path
+              d={arc.path}
+              fill="none"
+              stroke={arc.color}
+              strokeWidth="2"
+              strokeDasharray="1200"
+              opacity="0.6"
+              filter="url(#heroGlow)"
+              style={{
+                animation: `pulseArc ${arc.duration}s ${arc.delay}s ease-in-out infinite`,
+              }}
+            />
+            <path
+              d={arc.path}
+              fill="none"
+              stroke={arc.color}
+              strokeWidth="1"
+              strokeDasharray="1200"
+              opacity="0.3"
+              style={{
+                animation: `pulseArc ${arc.duration}s ${arc.delay + 0.5}s ease-in-out infinite`,
+              }}
+            />
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   HeroSection – All 5 animation layers combined
+────────────────────────────────────────────── */
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-gradient-aurora">
-      <AuroraBackground />
-      <EnergyFieldAnimation />
-      
-      <div className="container-custom relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="max-w-5xl mx-auto text-center space-y-8"
-        >
-          {/* Badge */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-secondary/80 backdrop-blur-sm rounded-full border border-glass-border"
-            style={{ borderColor: 'hsl(var(--glass-border))' }}
+    <section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: "linear-gradient(160deg, #0d0818 0%, #130d2a 50%, #0a0614 100%)" }}
+    >
+      {/* ── LAYER 1: Aurora Background (moving gradient blobs) ── */}
+      <div
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        style={{ zIndex: 0 }}
+        aria-hidden="true"
+      >
+        {/* Aurora blob 1 – top-left */}
+        <div
+          style={{
+            position: "absolute",
+            width: "900px", height: "900px",
+            top: "-400px", left: "-350px",
+            background: "radial-gradient(circle, rgba(109,40,217,0.22) 0%, transparent 70%)",
+            filter: "blur(80px)",
+            animation: "auroraMove 18s ease-in-out infinite alternate",
+          }}
+        />
+        {/* Aurora blob 2 – top-right */}
+        <div
+          style={{
+            position: "absolute",
+            width: "800px", height: "800px",
+            top: "-350px", right: "-300px",
+            background: "radial-gradient(circle, rgba(88,28,135,0.18) 0%, transparent 70%)",
+            filter: "blur(70px)",
+            animation: "auroraMove 18s ease-in-out infinite alternate",
+            animationDelay: "6s",
+          }}
+        />
+        {/* Aurora blob 3 – bottom-center */}
+        <div
+          style={{
+            position: "absolute",
+            width: "700px", height: "700px",
+            bottom: "-300px", left: "50%",
+            transform: "translateX(-50%)",
+            background: "radial-gradient(circle, rgba(124,58,237,0.14) 0%, transparent 70%)",
+            filter: "blur(65px)",
+            animation: "auroraMove 18s ease-in-out infinite alternate",
+            animationDelay: "12s",
+          }}
+        />
+      </div>
+
+      {/* ── LAYER 2: Floating Glass Shapes ── */}
+      <div
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        style={{ zIndex: 1 }}
+        aria-hidden="true"
+      >
+        <div
+          style={{
+            position: "absolute",
+            width: "280px", height: "280px",
+            top: "10%", left: "8%",
+            borderRadius: "50%",
+            opacity: 0.12,
+            background: "linear-gradient(135deg, rgba(159,107,255,0.3) 0%, rgba(122,92,255,0.3) 100%)",
+            filter: "blur(28px)",
+            animation: "float 12s ease-in-out infinite alternate",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            width: "240px", height: "240px",
+            top: "55%", right: "8%",
+            borderRadius: "50%",
+            opacity: 0.10,
+            background: "linear-gradient(135deg, rgba(183,148,246,0.3) 0%, rgba(129,140,248,0.3) 100%)",
+            filter: "blur(24px)",
+            animation: "float 12s ease-in-out infinite alternate",
+            animationDelay: "6s",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            width: "200px", height: "200px",
+            bottom: "12%", left: "50%",
+            transform: "translateX(-50%)",
+            borderRadius: "50%",
+            opacity: 0.08,
+            background: "linear-gradient(135deg, rgba(109,40,217,0.3) 0%, rgba(167,139,250,0.3) 100%)",
+            filter: "blur(22px)",
+            animation: "float 12s ease-in-out infinite alternate",
+            animationDelay: "3s",
+          }}
+        />
+      </div>
+
+      {/* ── LAYER 3: Energy Field SVG Arcs ── */}
+      <EnergyFieldSVG />
+
+      {/* ── LAYER 4: Very faint static arc decoration (bottom-right) ── */}
+      <svg
+        className="absolute bottom-0 right-0 pointer-events-none"
+        style={{ opacity: 0.06, zIndex: 1 }}
+        width="600"
+        height="400"
+        viewBox="0 0 600 400"
+        fill="none"
+        aria-hidden="true"
+      >
+        <ellipse cx="580" cy="420" rx="340" ry="200" stroke="#a78bfa" strokeWidth="1" />
+        <ellipse cx="580" cy="420" rx="260" ry="150" stroke="#a78bfa" strokeWidth="0.8" />
+        <ellipse cx="580" cy="420" rx="180" ry="100" stroke="#a78bfa" strokeWidth="0.6" />
+      </svg>
+
+      {/* ── LAYER 5: Content with Framer Motion text animations ── */}
+      <div className="container-custom relative pt-28 pb-36" style={{ zIndex: 10 }}>
+        <div className="max-w-4xl mx-auto text-center">
+
+          {/* H1 – per spec: opacity 0 y 40 → opacity 1 y 0, duration 1s */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              fontSize: "clamp(2.15rem, 5vw, 3.85rem)",
+              fontWeight: 800,
+              lineHeight: 1.1,
+              letterSpacing: "-0.025em",
+            }}
           >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+            <span className="block text-white">Digital Solutions</span>
+            <span
+              className="block"
+              style={{
+                background: "linear-gradient(90deg, #c4b5fd 0%, #a78bfa 50%, #8b5cf6 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
             >
-              <Sparkles className="w-4 h-4 text-primary" />
-            </motion.div>
-            <span className="text-sm font-medium text-gradient">
-              Digital Solutions Engineered for Growth
+              Engineered for Business
             </span>
-          </motion.div>
-          
-          {/* Main Heading */}
-          <motion.h1 
-            className="heading-xl text-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            Digital Solutions Engineered for 
-            <motion.span 
-              className="text-gradient font-extrabold block"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            <span
+              className="block"
+              style={{
+                background: "linear-gradient(90deg, #a78bfa 0%, #7c3aed 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
             >
-              Business Growth
-            </motion.span>
+              Growth
+            </span>
           </motion.h1>
-          
-          {/* Subtext */}
-          <motion.p 
-            className="body-lg max-w-4xl mx-auto text-muted-foreground leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
+
+          {/* Paragraph – per spec: y 30, delay 0.3s, duration 1s */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              maxWidth: "660px",
+              margin: "0 auto",
+              marginTop: "2rem",
+              marginBottom: "2.75rem",
+              fontSize: "clamp(0.95rem, 1.8vw, 1.07rem)",
+              lineHeight: 1.6,
+              color: "rgba(196,181,253,0.75)",
+            }}
           >
-            At Grituz, we build custom websites, mobile apps, digital marketing strategies, branding systems, 
-            reliable web support and maintenance, and practical AI automation tools that help growing businesses 
-            move faster, work smarter, and create a strong digital foundation for long-term success.
+            Grituz builds scalable web design, digital marketing, and AI automation solutions
+            that drive measurable business growth.
           </motion.p>
-          
-          {/* CTA Buttons */}
-          <motion.div 
+
+          {/* Buttons – per spec: y 20, delay 0.5s, duration 0.6s */}
+          <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button variant="hero" size="lg" className="bg-gradient-cta hover:shadow-glow transition-all duration-300" asChild>
-                <Link to="/services">
-                  Explore Solutions
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
+            {/* Primary – with hover -translate-y-1 + shadow per spec */}
+            <motion.div
+              whileHover={{ y: -4, boxShadow: "0 10px 30px rgba(109,40,217,0.5)" }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Link
+                to="/services"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "14px 32px",
+                  borderRadius: "8px",
+                  fontWeight: 600,
+                  fontSize: "0.95rem",
+                  background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
+                  color: "#fff",
+                  boxShadow: "0 4px 18px rgba(109,40,217,0.35)",
+                  textDecoration: "none",
+                  transition: "box-shadow 0.3s",
+                }}
+              >
+                Explore Solutions <ArrowRight style={{ width: 16, height: 16 }} />
+              </Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button variant="heroOutline" size="lg" className="border-glass-border hover:bg-glass-bg transition-all duration-300" 
-                style={{ borderColor: 'hsl(var(--glass-border))' }} asChild>
-                <Link to="/contact">Book a Consultation</Link>
-              </Button>
+
+            {/* Secondary */}
+            <motion.div
+              whileHover={{ y: -4 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Link
+                to="/contact"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  padding: "13px 32px",
+                  borderRadius: "8px",
+                  fontWeight: 600,
+                  fontSize: "0.95rem",
+                  color: "#e2d9f3",
+                  border: "1px solid rgba(167,139,250,0.35)",
+                  background: "rgba(109,40,217,0.08)",
+                  backdropFilter: "blur(8px)",
+                  textDecoration: "none",
+                  transition: "background 0.3s, border-color 0.3s, box-shadow 0.3s",
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.background = "rgba(109,40,217,0.15)";
+                  el.style.borderColor = "rgba(167,139,250,0.5)";
+                  el.style.boxShadow = "0 6px 20px rgba(109,40,217,0.25)";
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.background = "rgba(109,40,217,0.08)";
+                  el.style.borderColor = "rgba(167,139,250,0.35)";
+                  el.style.boxShadow = "none";
+                }}
+              >
+                Book a Consultation
+              </Link>
             </motion.div>
           </motion.div>
-        </motion.div>
+
+        </div>
       </div>
     </section>
   );

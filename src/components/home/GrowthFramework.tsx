@@ -1,97 +1,140 @@
 import { motion } from "framer-motion";
-import { Search, Lightbulb, Palette, Code, TrendingUp } from "lucide-react";
 
-const frameworkSteps = [
+/**
+ * GrowthFramework – Kodexa "Intelligence Pipeline" design
+ * Horizontal pipeline with glowing circle nodes connected by dashed lines.
+ * No icons — only numbered glow dots + title + description below each node.
+ */
+
+const steps = [
   {
-    icon: Search,
     title: "Discovery & Insight",
-    description: "We begin by understanding your business goals, audience behavior, technical landscape, and growth opportunities to create a clear digital direction."
+    description: "Understanding your business, audience, and growth gaps.",
   },
   {
-    icon: Lightbulb,
     title: "Strategy & Architecture",
-    description: "We design digital strategies, brand systems, marketing funnels, automation workflows, and scalable technology frameworks aligned with your objectives."
+    description: "Designing structured plans aligned with your goals.",
   },
   {
-    icon: Palette,
     title: "Design & Development",
-    description: "We build high-performance websites, mobile applications, branding assets, and intelligent automation systems focused on usability, speed, and scalability."
+    description: "Building high-performance, scalable digital solutions.",
   },
   {
-    icon: TrendingUp,
     title: "Optimization & Growth",
-    description: "We monitor performance, provide ongoing web support and maintenance, refine strategies, and continuously improve digital outcomes to ensure sustainable growth."
-  }
+    description: "Monitoring, refining, and improving long-term performance.",
+  },
 ];
 
 export default function GrowthFramework() {
   return (
-    <section className="section-padding bg-gradient-to-b from-secondary/20 to-background">
+    <section
+      className="section-padding"
+      style={{
+        background: "linear-gradient(180deg, #0d0818 0%, #110c22 100%)",
+      }}
+    >
       <div className="container-custom">
-        {/* Section Header */}
-        <motion.div 
+        {/* Header */}
+        <motion.div
           className="text-center mb-20"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
         >
-          <motion.h2 
-            className="heading-lg text-gradient mb-6"
-            initial={{ opacity: 0, y: 20 }}
+          <motion.h2
+            className="text-white text-center mb-6"
+            style={{ fontSize: "clamp(1.7rem, 3.5vw, 2.6rem)", fontWeight: 800, letterSpacing: "-0.02em" }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
           >
             The Grituz Digital Growth Framework
           </motion.h2>
-          <motion.p 
-            className="body-lg max-w-4xl mx-auto text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
+          <motion.p
+            className="max-w-2xl mx-auto text-center"
+            style={{ color: "rgba(196,181,253,0.65)", fontSize: "1rem", lineHeight: 1.7 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
           >
-            We transform ideas into scalable digital solutions through a structured strategy, design, and technology 
-            process built for measurable business growth.
+            "We transform ideas into scalable digital solutions through a structured strategy, design,
+            and technology process built for measurable business growth."
           </motion.p>
         </motion.div>
 
-        {/* Framework Steps */}
-        <div className="grid lg:grid-cols-2 gap-12">
-          {frameworkSteps.map((step, index) => (
-            <motion.div
-              key={step.title}
-              className="flex gap-6"
-              initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 * index }}
-            >
-              {/* Icon */}
-              <motion.div 
-                className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ duration: 0.3 }}
+        {/* Pipeline */}
+        <div className="relative">
+          {/* Connecting dashed line between nodes */}
+          <div
+            className="absolute top-[22px] left-[8%] right-[8%] hidden lg:block"
+            style={{
+              borderTop: "1.5px dashed rgba(139,92,246,0.3)",
+              zIndex: 0,
+            }}
+          />
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 relative z-10">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.title}
+                className="flex flex-col items-center text-center"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.65, delay: i * 0.13 }}
               >
-                <step.icon className="w-8 h-8 text-primary-foreground" />
-              </motion.div>
-              
-              {/* Content */}
-              <div className="space-y-4">
-                <motion.h3 
-                  className="heading-md text-foreground"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
+                {/* Circle node */}
+                <motion.div
+                  className="relative mb-6"
+                  whileHover={{ scale: 1.12 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Outer glow ring */}
+                  <div
+                    className="absolute -inset-3 rounded-full"
+                    style={{
+                      background: "radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 70%)",
+                      filter: "blur(8px)",
+                    }}
+                  />
+                  {/* Main dot */}
+                  <div
+                    className="relative w-11 h-11 rounded-full flex items-center justify-center"
+                    style={{
+                      background: "linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)",
+                      boxShadow: "0 0 18px rgba(124,58,237,0.6), 0 0 6px rgba(124,58,237,0.4)",
+                    }}
+                  >
+                    <div
+                      className="w-4 h-4 rounded-full"
+                      style={{ background: "rgba(255,255,255,0.9)" }}
+                    />
+                  </div>
+                </motion.div>
+
+                {/* Text */}
+                <h3
+                  className="font-bold mb-2 text-white"
+                  style={{ fontSize: "0.95rem" }}
                 >
                   {step.title}
-                </motion.h3>
-                <p className="body-md text-muted-foreground leading-relaxed">
+                </h3>
+                <p
+                  style={{
+                    fontSize: "0.83rem",
+                    lineHeight: 1.65,
+                    color: "rgba(196,181,253,0.6)",
+                    maxWidth: "180px",
+                  }}
+                >
                   {step.description}
                 </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
