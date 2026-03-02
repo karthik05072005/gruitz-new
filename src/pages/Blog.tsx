@@ -12,6 +12,7 @@ const blogPosts = [
         date: "February 28, 2026",
         readTime: "8 min read",
         category: "Web Design",
+        image: "/images/blog_ai_vs_agency.png",
     },
     {
         slug: "/blog/digital-marketing-trends-2026",
@@ -20,6 +21,7 @@ const blogPosts = [
         date: "February 20, 2026",
         readTime: "7 min read",
         category: "Digital Marketing",
+        image: "/images/blog_marketing_trends.png",
     },
     {
         slug: "/blog/automation-save-business-time",
@@ -28,6 +30,7 @@ const blogPosts = [
         date: "February 10, 2026",
         readTime: "6 min read",
         category: "AI Automation",
+        image: "/images/blog_automation.png",
     },
 ];
 
@@ -64,37 +67,49 @@ export default function Blog() {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
                                 whileHover={{ y: -6 }}
-                                className="glass-card flex flex-col group hover:shadow-glow transition-all duration-300"
-                                style={{ borderColor: 'rgba(139,92,246,0.15)', padding: '2rem' }}
+                                className="glass-card flex flex-col group hover:shadow-glow transition-all duration-300 overflow-hidden"
+                                style={{ borderColor: 'rgba(139,92,246,0.15)', padding: '0' }}
                             >
-                                {/* Category */}
-                                <div className="flex items-center gap-2 mb-4">
-                                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[post.category]}`}>
-                                        <Tag className="w-3 h-3" />
-                                        {post.category}
-                                    </span>
+                                {/* Thumbnail */}
+                                <div className="w-full h-44 overflow-hidden flex-shrink-0">
+                                    <img
+                                        src={post.image}
+                                        alt={post.title}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
                                 </div>
 
-                                {/* Title */}
-                                <h2 className="text-foreground font-bold text-lg leading-snug mb-3 group-hover:text-primary transition-colors">
-                                    {post.title}
-                                </h2>
+                                {/* Card Content */}
+                                <div className="flex flex-col flex-grow p-6">
+                                    {/* Category */}
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[post.category]}`}>
+                                            <Tag className="w-3 h-3" />
+                                            {post.category}
+                                        </span>
+                                    </div>
 
-                                {/* Excerpt */}
-                                <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
-                                    {post.excerpt}
-                                </p>
+                                    {/* Title */}
+                                    <h2 className="text-foreground font-bold text-lg leading-snug mb-3 group-hover:text-primary transition-colors">
+                                        {post.title}
+                                    </h2>
 
-                                {/* Meta */}
-                                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-5">
-                                    <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{post.date}</span>
-                                    <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{post.readTime}</span>
-                                </div>
+                                    {/* Excerpt */}
+                                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                                        {post.excerpt}
+                                    </p>
 
-                                {/* Read More */}
-                                <Link to={post.slug} className="flex items-center gap-2 text-primary font-medium text-sm hover:gap-3 transition-all duration-200 mt-auto">
-                                    Read Article <ArrowRight className="w-4 h-4" />
-                                </Link>
+                                    {/* Meta */}
+                                    <div className="flex items-center gap-4 text-xs text-muted-foreground mb-5">
+                                        <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{post.date}</span>
+                                        <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{post.readTime}</span>
+                                    </div>
+
+                                    {/* Read More */}
+                                    <Link to={post.slug} className="flex items-center gap-2 text-primary font-medium text-sm hover:gap-3 transition-all duration-200 mt-auto">
+                                        Read Article <ArrowRight className="w-4 h-4" />
+                                    </Link>
+                                </div>{/* end card content */}
                             </motion.div>
                         ))}
                     </div>

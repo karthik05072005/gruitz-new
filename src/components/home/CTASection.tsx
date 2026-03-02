@@ -71,7 +71,7 @@ export default function CTASection() {
                 fontWeight: 800,
                 lineHeight: 1.2,
                 letterSpacing: "-0.02em",
-                background: "linear-gradient(90deg, #e9d5ff 0%, #a78bfa 60%, #8b5cf6 100%)",
+                background: "linear-gradient(90deg, #c4b5fd 0%, #a44ef4 60%, #9637ec 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -121,17 +121,17 @@ export default function CTASection() {
                     alignItems: "center",
                     gap: "8px",
                     padding: "14px 36px",
-                    borderRadius: "8px",
+                    borderRadius: "10px",
                     fontWeight: 600,
                     fontSize: "0.95rem",
-                    background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
+                    background: "linear-gradient(135deg, #9637ec 0%, #a44ef4 100%)",
                     color: "#fff",
-                    boxShadow: "0 4px 20px rgba(109,40,217,0.35)",
+                    boxShadow: "0 4px 20px rgba(150,55,236,0.4)",
                     transition: "box-shadow 0.2s",
                     textDecoration: "none",
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 6px 28px rgba(109,40,217,0.55)")}
-                  onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 4px 20px rgba(109,40,217,0.35)")}
+                  onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 6px 28px rgba(164,78,244,0.58)")}
+                  onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 4px 20px rgba(150,55,236,0.4)")}
                 >
                   Book a Free Consultation
                   <ArrowRight style={{ width: 16, height: 16 }} />

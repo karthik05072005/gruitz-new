@@ -56,7 +56,7 @@ export default function AboutSection() {
             About{" "}
             <span
               style={{
-                background: "linear-gradient(90deg, #c4b5fd 0%, #8b5cf6 100%)",
+                background: "linear-gradient(90deg, #b76af7 0%, #9637ec 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -94,9 +94,9 @@ export default function AboutSection() {
                 <div className="flex items-start gap-3">
                   <div
                     className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: "rgba(124,58,237,0.18)" }}
+                    style={{ background: "rgba(150,55,236,0.18)" }}
                   >
-                    <card.icon style={{ width: "17px", height: "17px", color: "#a78bfa" }} />
+                    <card.icon style={{ width: "17px", height: "17px", color: "#a44ef4" }} />
                   </div>
                   <div>
                     <h4
@@ -145,7 +145,7 @@ export default function AboutSection() {
                   style={{
                     fontSize: "1.3rem",
                     fontWeight: 700,
-                    background: "linear-gradient(90deg, #e9d5ff 0%, #a78bfa 100%)",
+                    background: "linear-gradient(90deg, #c4b5fd 0%, #a44ef4 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -161,7 +161,7 @@ export default function AboutSection() {
                 <div
                   style={{
                     width: "48px", height: "2px",
-                    background: "linear-gradient(90deg, #7c3aed, #a78bfa)",
+                    background: "linear-gradient(90deg, #9637ec, #a44ef4)",
                     borderRadius: "4px",
                   }}
                 />

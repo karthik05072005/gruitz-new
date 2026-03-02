@@ -11,12 +11,12 @@ const navigationLinks = [
 ];
 
 const servicesLinks = [
-  { name: "Web Design", path: "/services/web-design" },
-  { name: "Digital Marketing", path: "/services/digital-marketing" },
-  { name: "Branding", path: "/services/branding" },
-  { name: "AI Automation", path: "/services/ai-automation" },
-  { name: "Custom Software", path: "/services/custom-software" },
-  { name: "Web Support", path: "/services/web-support" },
+  { name: "Web Design", path: "/web-design" },
+  { name: "Digital Marketing", path: "/digital-marketing" },
+  { name: "Branding", path: "/contact?service=branding" },
+  { name: "AI Automation", path: "/ai-automation" },
+  { name: "Custom Software", path: "/custom-software" },
+  { name: "Web Support", path: "/web-support" },
 ];
 
 const socialLinks = [
@@ -39,8 +39,8 @@ export default function Footer() {
               </p>
             </div>
             <p className="body-sm text-muted-foreground leading-relaxed max-w-xs">
-              Building scalable digital solutions that help growing businesses thrive. 
-              From websites and branding to marketing, automation, and custom software, 
+              Building scalable digital solutions that help growing businesses thrive.
+              From websites and branding to marketing, automation, and custom software,
               we turn ideas into measurable growth.
             </p>
             {/* Social Icons */}

@@ -29,7 +29,7 @@ const mainServices = [
     title: "Branding",
     description: "We build strong brand identities that help your business stand out, connect with customers, and stay consistent across all platforms.",
     features: ["Logo Design", "Brand Colors & Visual Style", "Brand Messaging", "Brand Guidelines"],
-    link: "/contact",
+    link: "/contact?service=branding",
   },
   {
     id: "ai-automation",

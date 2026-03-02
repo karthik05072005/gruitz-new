@@ -231,7 +231,7 @@ export default function HeroSection() {
             <span
               className="block"
               style={{
-                background: "linear-gradient(90deg, #c4b5fd 0%, #a78bfa 50%, #8b5cf6 100%)",
+                background: "linear-gradient(90deg, #b76af7 0%, #a44ef4 50%, #9637ec 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -242,7 +242,7 @@ export default function HeroSection() {
             <span
               className="block"
               style={{
-                background: "linear-gradient(90deg, #a78bfa 0%, #7c3aed 100%)",
+                background: "linear-gradient(90deg, #a44ef4 0%, #9637ec 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -273,32 +273,35 @@ export default function HeroSection() {
 
           {/* Buttons – per spec: y 20, delay 0.5s, duration 0.6s */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full px-4 sm:px-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Primary – with hover -translate-y-1 + shadow per spec */}
             <motion.div
-              whileHover={{ y: -4, boxShadow: "0 10px 30px rgba(109,40,217,0.5)" }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.3 }}
+              className="w-full sm:w-auto"
+              whileHover={{ y: -1, boxShadow: "0 8px 24px rgba(164,78,244,0.45)" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
             >
               <Link
                 to="/services"
                 style={{
-                  display: "inline-flex",
+                  display: "flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   gap: "8px",
-                  padding: "14px 32px",
-                  borderRadius: "8px",
+                  padding: "14px 36px",
+                  borderRadius: "10px",
                   fontWeight: 600,
                   fontSize: "0.95rem",
-                  background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
+                  background: "linear-gradient(135deg, #9637ec 0%, #a44ef4 100%)",
                   color: "#fff",
-                  boxShadow: "0 4px 18px rgba(109,40,217,0.35)",
+                  boxShadow: "0 4px 18px rgba(150,55,236,0.4)",
                   textDecoration: "none",
                   transition: "box-shadow 0.3s",
+                  width: "100%",
                 }}
               >
                 Explore Solutions <ArrowRight style={{ width: 16, height: 16 }} />
@@ -307,36 +310,39 @@ export default function HeroSection() {
 
             {/* Secondary */}
             <motion.div
-              whileHover={{ y: -4 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.3 }}
+              className="w-full sm:w-auto"
+              whileHover={{ y: -1 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
             >
               <Link
                 to="/contact"
                 style={{
-                  display: "inline-flex",
+                  display: "flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   padding: "13px 32px",
-                  borderRadius: "8px",
+                  borderRadius: "10px",
                   fontWeight: 600,
                   fontSize: "0.95rem",
                   color: "#e2d9f3",
-                  border: "1px solid rgba(167,139,250,0.35)",
-                  background: "rgba(109,40,217,0.08)",
+                  border: "1px solid rgba(164,78,244,0.4)",
+                  background: "rgba(150,55,236,0.10)",
                   backdropFilter: "blur(8px)",
                   textDecoration: "none",
                   transition: "background 0.3s, border-color 0.3s, box-shadow 0.3s",
+                  width: "100%",
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.background = "rgba(109,40,217,0.15)";
-                  el.style.borderColor = "rgba(167,139,250,0.5)";
-                  el.style.boxShadow = "0 6px 20px rgba(109,40,217,0.25)";
+                  el.style.background = "rgba(150,55,236,0.18)";
+                  el.style.borderColor = "rgba(164,78,244,0.55)";
+                  el.style.boxShadow = "0 6px 20px rgba(150,55,236,0.28)";
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.background = "rgba(109,40,217,0.08)";
-                  el.style.borderColor = "rgba(167,139,250,0.35)";
+                  el.style.background = "rgba(150,55,236,0.10)";
+                  el.style.borderColor = "rgba(164,78,244,0.4)";
                   el.style.boxShadow = "none";
                 }}
               >

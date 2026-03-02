@@ -7,37 +7,37 @@ const services = [
     icon: Monitor,
     title: "Web Design",
     description: "Custom-designed, fully developed websites built for performance and scalability.",
-    link: "/services/web-design"
+    link: "/web-design"
   },
   {
     icon: TrendingUp,
     title: "Digital Marketing",
     description: "SEO, paid campaigns, and content strategies that increase visibility and qualified leads.",
-    link: "/services/digital-marketing"
+    link: "/digital-marketing"
   },
   {
     icon: Palette,
     title: "Branding",
     description: "Strategic brand identity, logo design, messaging systems, and visual consistency.",
-    link: "/services/branding"
+    link: "/contact?service=branding"
   },
   {
     icon: Bot,
     title: "AI Automation",
     description: "Smart automation workflows and AI tools that improve efficiency and customer experience.",
-    link: "/services/ai-automation"
+    link: "/ai-automation"
   },
   {
     icon: Code,
     title: "Custom Software",
     description: "Tailored web applications and business software built around your operational needs.",
-    link: "/services/custom-software"
+    link: "/custom-software"
   },
   {
     icon: Wrench,
     title: "Web Support",
     description: "Ongoing updates, security monitoring, and performance optimization for long-term stability.",
-    link: "/services/web-support"
+    link: "/web-support"
   }
 ];
 
@@ -46,14 +46,14 @@ export default function ServicesSection() {
     <section className="section-padding bg-gradient-to-b from-background to-secondary/20">
       <div className="container-custom">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h2 
+          <motion.h2
             className="heading-lg text-gradient mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export default function ServicesSection() {
           >
             Our Core Digital Services
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="body-lg max-w-3xl mx-auto text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ export default function ServicesSection() {
         </motion.div>
 
         {/* Services Grid */}
-        <motion.div 
+        <motion.div
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,13 +93,13 @@ export default function ServicesSection() {
             >
               <div className="glass-card p-8 h-full flex flex-col hover:shadow-glow transition-all duration-300">
                 {/* Icon */}
-                <motion.div 
+                <motion.div
                   className="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
                   whileHover={{ rotate: 5 }}
                 >
                   <service.icon className="w-8 h-8 text-primary-foreground" />
                 </motion.div>
-                
+
                 {/* Content */}
                 <div className="flex-1 space-y-4">
                   <h3 className="heading-sm text-foreground group-hover:text-gradient transition-colors duration-300">
@@ -109,14 +109,14 @@ export default function ServicesSection() {
                     {service.description}
                   </p>
                 </div>
-                
+
                 {/* Learn More Link */}
-                <motion.div 
+                <motion.div
                   className="pt-4"
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Link 
+                  <Link
                     to={service.link}
                     className="inline-flex items-center gap-2 text-primary font-medium hover:text-primary/80 transition-colors duration-200"
                   >

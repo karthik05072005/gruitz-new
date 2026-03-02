@@ -95,6 +95,22 @@ export default function About() {
               </motion.p>
             </div>
 
+            {/* AI Team Visual */}
+            <motion.div
+              className="mb-16 rounded-2xl overflow-hidden"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{ boxShadow: "0 8px 40px rgba(150,55,236,0.25)", border: "1px solid rgba(164,78,244,0.2)" }}
+            >
+              <img
+                src="/images/about_hero_ai.png"
+                alt="Grituz AI-powered digital team"
+                className="w-full h-72 md:h-96 object-cover"
+              />
+            </motion.div>
+
             {/* Stats Row */}
             <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
               {[
@@ -125,7 +141,7 @@ export default function About() {
       <LazySection>
         <section className="section-padding bg-gradient-to-b from-secondary/20 to-background">
           <div className="container-custom">
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 items-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -160,6 +176,22 @@ export default function About() {
                   To be a trusted digital partner for modern businesses, known for clarity, creativity,
                   and performance-driven results.
                 </p>
+              </motion.div>
+              {/* AI Vision Image */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="rounded-2xl overflow-hidden hidden md:block"
+                style={{ boxShadow: "0 8px 40px rgba(150,55,236,0.3)", border: "1px solid rgba(164,78,244,0.2)" }}
+              >
+                <img
+                  src="/images/about_ai_vision.png"
+                  alt="AI neural network vision"
+                  className="w-full h-full object-cover"
+                  style={{ minHeight: "260px" }}
+                />
               </motion.div>
             </div>
           </div>
