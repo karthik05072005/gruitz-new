@@ -107,7 +107,7 @@ export default function About() {
               <img
                 src="/images/about_hero_ai.png"
                 alt="Grituz AI-powered digital team"
-                className="w-full h-72 md:h-96 object-cover"
+                className="w-full h-auto"
               />
             </motion.div>
 
@@ -189,8 +189,7 @@ export default function About() {
                 <img
                   src="/images/about_ai_vision.png"
                   alt="AI neural network vision"
-                  className="w-full h-full object-cover"
-                  style={{ minHeight: "260px" }}
+                  className="w-full h-auto"
                 />
               </motion.div>
             </div>
