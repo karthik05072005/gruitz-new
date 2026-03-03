@@ -23,7 +23,6 @@ export default function CTASection() {
             position: "relative",
             maxWidth: "860px",
             margin: "0 auto",
-            padding: "3.5rem 3rem",
             textAlign: "center",
             background: "rgba(109,40,217,0.07)",
             border: "1px solid rgba(139,92,246,0.18)",
@@ -31,6 +30,7 @@ export default function CTASection() {
             backdropFilter: "blur(12px)",
             overflow: "hidden",
           }}
+          className="px-5 py-10 sm:px-10 sm:py-14"
         >
           {/* Top-edge shimmer line */}
           <div

@@ -19,7 +19,7 @@ const services = [
     icon: Palette,
     title: "Branding",
     description: "Strategic brand identity, logo design, messaging systems, and visual consistency.",
-    link: "/contact?service=branding"
+    link: "/services#branding"
   },
   {
     icon: Bot,

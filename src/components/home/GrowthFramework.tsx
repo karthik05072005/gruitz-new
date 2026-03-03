@@ -6,9 +6,9 @@ import { useState, useEffect } from "react";
  * Features:
  *  - Active step cycling every 3s
  *  - SVG data flow lines with traveling signal dots
- *  - Floating particle background
- *  - Pulsing core glow box
+ *  - Enhanced: ambient orbs + mesh grid + more floating particles
  *  - Glass-card steps with hover + active animations
+ *  - "Currently Active" card removed (no content value)
  */
 
 const steps = [
@@ -35,12 +35,14 @@ const steps = [
 ];
 
 /* ── Floating Particles ── */
-const particles = Array.from({ length: 18 }, (_, i) => ({
+const particles = Array.from({ length: 28 }, (_, i) => ({
   id: i,
   left: `${(i * 37 + 11) % 100}%`,
   top: `${(i * 53 + 7) % 100}%`,
-  delay: `${(i * 0.7) % 5}s`,
-  duration: `${15 + (i * 3) % 10}s`,
+  delay: `${(i * 0.5) % 5}s`,
+  duration: `${12 + (i * 2.5) % 12}s`,
+  size: i % 3 === 0 ? "4px" : "2px",
+  opacity: i % 4 === 0 ? 0.55 : 0.3,
 }));
 
 /* ── Pipeline Step Component ── */
@@ -154,6 +156,61 @@ export default function GrowthFramework() {
       className="section-padding relative overflow-hidden"
       style={{ background: "linear-gradient(180deg, #0d0818 0%, #110c22 100%)" }}
     >
+      {/* ── Large ambient orbs ── */}
+      <motion.div
+        className="absolute pointer-events-none"
+        animate={{ opacity: [0.07, 0.14, 0.07], scale: [1, 1.08, 1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          width: "520px",
+          height: "520px",
+          top: "-200px",
+          left: "-180px",
+          background: "radial-gradient(circle, rgba(164,78,244,0.35) 0%, transparent 65%)",
+          filter: "blur(60px)",
+        }}
+      />
+      <motion.div
+        className="absolute pointer-events-none"
+        animate={{ opacity: [0.06, 0.12, 0.06], scale: [1, 1.1, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        style={{
+          width: "460px",
+          height: "460px",
+          bottom: "-180px",
+          right: "-140px",
+          background: "radial-gradient(circle, rgba(107,28,201,0.4) 0%, transparent 65%)",
+          filter: "blur(55px)",
+        }}
+      />
+      <motion.div
+        className="absolute pointer-events-none"
+        animate={{ opacity: [0.04, 0.09, 0.04] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+        style={{
+          width: "300px",
+          height: "300px",
+          top: "40%",
+          left: "45%",
+          background: "radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 65%)",
+          filter: "blur(40px)",
+        }}
+      />
+
+      {/* ── SVG Mesh Grid ── */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ opacity: 0.04 }}
+        aria-hidden="true"
+      >
+        <defs>
+          <pattern id="meshGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M60 0 L0 0 0 60" fill="none" stroke="rgba(164,78,244,1)" strokeWidth="0.8" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#meshGrid)" />
+      </svg>
+
       {/* ── Floating Particles ── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {particles.map((p) => (
@@ -161,9 +218,9 @@ export default function GrowthFramework() {
             key={p.id}
             className="absolute rounded-full animate-float"
             style={{
-              width: "3px",
-              height: "3px",
-              background: "rgba(164,78,244,0.35)",
+              width: p.size,
+              height: p.size,
+              background: `rgba(164,78,244,${p.opacity})`,
               left: p.left,
               top: p.top,
               animationDelay: p.delay,
@@ -207,78 +264,6 @@ export default function GrowthFramework() {
             We transform ideas into scalable digital solutions through a structured strategy,
             design, and technology process built for measurable business growth.
           </motion.p>
-        </motion.div>
-
-        {/* ── Pulsing Core Display Box ── */}
-        <motion.div
-          animate={{
-            y: [0, -8, 0],
-            boxShadow: [
-              "0 0 40px rgba(150,55,236,0.15)",
-              "0 0 70px rgba(164,78,244,0.35)",
-              "0 0 40px rgba(150,55,236,0.15)",
-            ],
-          }}
-          transition={{
-            y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-            boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-          }}
-          className="max-w-lg mx-auto rounded-3xl mb-16 text-center"
-          style={{
-            background: "rgba(150,55,236,0.07)",
-            border: "1px solid rgba(164,78,244,0.2)",
-            backdropFilter: "blur(12px)",
-            padding: "2rem 2.5rem",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "0.75rem",
-              fontWeight: 600,
-              letterSpacing: "0.12em",
-              color: "rgba(164,78,244,0.8)",
-              textTransform: "uppercase",
-              marginBottom: "0.5rem",
-            }}
-          >
-            Currently Active
-          </div>
-          <motion.div
-            key={activeStep}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.4 }}
-            style={{
-              fontSize: "1.2rem",
-              fontWeight: 700,
-              color: "#e2d9f3",
-            }}
-          >
-            {steps[activeStep].title}
-          </motion.div>
-          {/* Progress bar */}
-          <div
-            style={{
-              marginTop: "1rem",
-              height: "3px",
-              borderRadius: "2px",
-              background: "rgba(164,78,244,0.15)",
-              overflow: "hidden",
-            }}
-          >
-            <motion.div
-              key={`bar-${activeStep}`}
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 3, ease: "linear" }}
-              style={{
-                height: "100%",
-                background: "linear-gradient(90deg, #9637ec, #a44ef4)",
-                borderRadius: "2px",
-              }}
-            />
-          </div>
         </motion.div>
 
         {/* ── SVG Data Flow Lines ── */}
