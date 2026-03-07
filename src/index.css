@@ -432,16 +432,14 @@
 
   @keyframes pulseArc {
     0% {
-      stroke-dashoffset: 1200;
       opacity: 0;
     }
 
     40% {
-      opacity: 1;
+      opacity: 0.4;
     }
 
     100% {
-      stroke-dashoffset: 0;
       opacity: 0;
     }
   }

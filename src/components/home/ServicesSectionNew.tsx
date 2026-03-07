@@ -91,7 +91,7 @@ export default function ServicesSection() {
               whileHover={{ y: -5 }}
               className="group"
             >
-              <div className="glass-card p-8 h-full flex flex-col hover:shadow-glow transition-all duration-300">
+              <div className="glass-card p-6 sm:p-8 h-full flex flex-col hover:shadow-glow transition-all duration-300">
                 {/* Icon */}
                 <motion.div
                   className="w-16 h-16 rounded-2xl bg-gradient-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"

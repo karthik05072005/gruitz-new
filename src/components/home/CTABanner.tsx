@@ -19,7 +19,7 @@ export default function CTABanner() {
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary-foreground/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary-foreground/5 rounded-full blur-3xl" />
           </div>
-          
+
           <div className="relative z-10 px-8 py-16 md:px-16 md:py-20 text-center">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
               Got a Project in Mind?
@@ -30,7 +30,7 @@ export default function CTABanner() {
             </p>
             <Button
               size="xl"
-              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 w-full sm:w-auto"
               asChild
             >
               <Link to="/contact">

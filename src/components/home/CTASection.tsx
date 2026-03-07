@@ -64,10 +64,10 @@ export default function CTASection() {
             }}
           />
 
-          <div className="relative z-10 space-y-5">
+          <div className="relative z-10 space-y-6">
             <motion.h2
               style={{
-                fontSize: "clamp(1.65rem, 3vw, 2.4rem)",
+                fontSize: "clamp(1.65rem, 4.5vw, 2.4rem)",
                 fontWeight: 800,
                 lineHeight: 1.2,
                 letterSpacing: "-0.02em",
@@ -87,7 +87,7 @@ export default function CTASection() {
             <motion.p
               style={{
                 color: "rgba(196,181,253,0.65)",
-                fontSize: "0.97rem",
+                fontSize: "clamp(0.9rem, 2vw, 0.97rem)",
                 lineHeight: 1.72,
                 maxWidth: "560px",
                 margin: "0 auto",
@@ -108,20 +108,22 @@ export default function CTASection() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.26 }}
               style={{ paddingTop: "0.5rem" }}
+              className="w-full flex justify-center"
             >
               <motion.div
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                style={{ display: "inline-block" }}
+                className="w-full sm:w-auto"
               >
                 <Link
                   to="/contact"
                   style={{
-                    display: "inline-flex",
+                    display: "flex",
                     alignItems: "center",
+                    justifyContent: "center",
                     gap: "8px",
-                    padding: "14px 36px",
-                    borderRadius: "10px",
+                    padding: "16px 36px",
+                    borderRadius: "12px",
                     fontWeight: 600,
                     fontSize: "0.95rem",
                     background: "linear-gradient(135deg, #9637ec 0%, #a44ef4 100%)",
@@ -129,6 +131,7 @@ export default function CTASection() {
                     boxShadow: "0 4px 20px rgba(150,55,236,0.4)",
                     transition: "box-shadow 0.2s",
                     textDecoration: "none",
+                    width: "100%",
                   }}
                   onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 6px 28px rgba(164,78,244,0.58)")}
                   onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 4px 20px rgba(150,55,236,0.4)")}

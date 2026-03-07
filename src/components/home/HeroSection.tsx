@@ -30,18 +30,18 @@ function EnergyFieldSVG() {
     const update = () => {
       if (!containerRef.current) return;
       const { width, height } = containerRef.current.getBoundingClientRect();
-      const newArcs: EnergyArc[] = Array.from({ length: 8 }, (_, i) => ({
+      const newArcs: EnergyArc[] = Array.from({ length: 4 }, (_, i) => ({
         id: Date.now() + i,
         color: colors[Math.floor(Math.random() * colors.length)],
-        duration: 3 + Math.random() * 4,
-        delay: Math.random() * 2,
+        duration: 8 + Math.random() * 6,
+        delay: Math.random() * 4,
         path: generateRandomPath(width, height),
       }));
       setArcs(newArcs);
     };
 
     update();
-    const interval = setInterval(update, 2000); // regenerate every 2s per spec
+    const interval = setInterval(update, 10000); // reduced frequency to 10s
     return () => clearInterval(interval);
   }, []);
 
@@ -291,9 +291,9 @@ export default function HeroSection() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: "8px",
-                  padding: "14px 36px",
-                  borderRadius: "10px",
+                  gap: "10px",
+                  padding: "16px 36px",
+                  borderRadius: "12px",
                   fontWeight: 600,
                   fontSize: "0.95rem",
                   background: "linear-gradient(135deg, #9637ec 0%, #a44ef4 100%)",
@@ -304,7 +304,7 @@ export default function HeroSection() {
                   width: "100%",
                 }}
               >
-                Explore Solutions <ArrowRight style={{ width: 16, height: 16 }} />
+                Explore Solutions <ArrowRight style={{ width: 18, height: 18 }} />
               </Link>
             </motion.div>
 
@@ -321,8 +321,8 @@ export default function HeroSection() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  padding: "13px 32px",
-                  borderRadius: "10px",
+                  padding: "15px 32px",
+                  borderRadius: "12px",
                   fontWeight: 600,
                   fontSize: "0.95rem",
                   color: "#e2d9f3",
