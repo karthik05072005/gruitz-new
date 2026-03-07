@@ -30,18 +30,18 @@ function EnergyFieldSVG() {
     const update = () => {
       if (!containerRef.current) return;
       const { width, height } = containerRef.current.getBoundingClientRect();
-      const newArcs: EnergyArc[] = Array.from({ length: 4 }, (_, i) => ({
+      const newArcs: EnergyArc[] = Array.from({ length: 6 }, (_, i) => ({
         id: Date.now() + i,
         color: colors[Math.floor(Math.random() * colors.length)],
-        duration: 8 + Math.random() * 6,
-        delay: Math.random() * 4,
+        duration: 3 + Math.random() * 4,
+        delay: Math.random() * 2,
         path: generateRandomPath(width, height),
       }));
       setArcs(newArcs);
     };
 
     update();
-    const interval = setInterval(update, 10000); // reduced frequency to 10s
+    const interval = setInterval(update, 2000); // regenerate every 2s per spec
     return () => clearInterval(interval);
   }, []);
 
