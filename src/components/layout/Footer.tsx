@@ -13,7 +13,7 @@ const navigationLinks = [
 const servicesLinks = [
   { name: "Web Design", path: "/web-design" },
   { name: "Digital Marketing", path: "/digital-marketing" },
-  { name: "Branding", path: "/services#branding" },
+  { name: "Branding", path: "/branding" },
   { name: "AI Automation", path: "/ai-automation" },
   { name: "Custom Software", path: "/custom-software" },
   { name: "Web Support", path: "/web-support" },

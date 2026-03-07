@@ -20,6 +20,7 @@ import DigitalMarketing from "./pages/DigitalMarketing";
 import WebSupport from "./pages/WebSupport";
 import AIAutomation from "./pages/AIAutomation";
 import CustomSoftware from "./pages/CustomSoftware";
+import Branding from "./pages/Branding";
 // Blog
 import Blog from "./pages/Blog";
 import BlogPost1 from "./pages/BlogPost1";
@@ -82,6 +83,7 @@ function AnimatedRoutes() {
         <Route path="/web-support" element={wrap(<WebSupport />)} />
         <Route path="/ai-automation" element={wrap(<AIAutomation />)} />
         <Route path="/custom-software" element={wrap(<CustomSoftware />)} />
+        <Route path="/branding" element={wrap(<Branding />)} />
         {/* Blog */}
         <Route path="/blog" element={wrap(<Blog />)} />
         <Route path="/blog/ai-website-builder-vs-web-design-agency" element={wrap(<BlogPost1 />)} />
