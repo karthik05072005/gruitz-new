@@ -283,7 +283,7 @@ export default function HeroSection() {
               className="w-full sm:w-auto"
               whileHover={{ y: -1, boxShadow: "0 8px 24px rgba(164,78,244,0.45)" }}
               whileTap={{ scale: 0.98 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+              transition={{ duration: 0.3 }}
             >
               <Link
                 to="/services"
@@ -313,7 +313,7 @@ export default function HeroSection() {
               className="w-full sm:w-auto"
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+              transition={{ duration: 0.3 }}
             >
               <Link
                 to="/contact"
