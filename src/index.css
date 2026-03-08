@@ -430,6 +430,15 @@
     transition: left 0.05s linear, top 0.05s linear;
   }
 
+
+  .energy-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
   @keyframes pulseArc {
     0% {
       stroke-dashoffset: 1200;
@@ -443,16 +452,6 @@
     100% {
       stroke-dashoffset: 0;
       opacity: 0;
-    }
-  }
-
-  @keyframes flowMove {
-    from {
-      stroke-dashoffset: 0;
-    }
-
-    to {
-      stroke-dashoffset: -200;
     }
   }
 

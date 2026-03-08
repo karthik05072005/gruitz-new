@@ -2,100 +2,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import EnergyField from "./EnergyField";
 
-/* ─────────────────────────────────────────────
-   Energy Arc SVG – Animated electric arcs
-   Matches spec: pulseArc keyframe, colours, glow filter
-────────────────────────────────────────────── */
-interface EnergyArc {
-  id: number;
-  color: string;
-  duration: number;
-  delay: number;
-  path: string;
-}
-
-function EnergyFieldSVG() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [arcs, setArcs] = useState<EnergyArc[]>([]);
-
-  const colors = ["#9f6bff", "#7a5cff", "#b794f6", "#818cf8"];
-
-  const generateRandomPath = (width: number, height: number): string => {
-    const r = () => Math.random();
-    return `M ${r() * width} ${r() * height} C ${r() * width} ${r() * height}, ${r() * width} ${r() * height}, ${r() * width} ${r() * height}`;
-  };
-
-  useEffect(() => {
-    const update = () => {
-      if (!containerRef.current) return;
-      const { width, height } = containerRef.current.getBoundingClientRect();
-      const newArcs: EnergyArc[] = Array.from({ length: 6 }, (_, i) => ({
-        id: Date.now() + i,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        duration: 3 + Math.random() * 4,
-        delay: Math.random() * 2,
-        path: generateRandomPath(width, height),
-      }));
-      setArcs(newArcs);
-    };
-
-    update();
-    const interval = setInterval(update, 2000); // regenerate every 2s per spec
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div
-      ref={containerRef}
-      className="absolute inset-0 overflow-hidden pointer-events-none"
-      style={{ zIndex: 1 }}
-    >
-      <svg className="absolute inset-0 w-full h-full" style={{ filter: "blur(0.5px)" }}>
-        <defs>
-          <filter id="heroGlow">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-        {arcs.map((arc) => (
-          <g key={arc.id}>
-            <path
-              d={arc.path}
-              fill="none"
-              stroke={arc.color}
-              strokeWidth="2"
-              strokeDasharray="1200"
-              opacity="0.6"
-              filter="url(#heroGlow)"
-              style={{
-                animation: `pulseArc ${arc.duration}s ${arc.delay}s ease-in-out infinite`,
-              }}
-            />
-            <path
-              d={arc.path}
-              fill="none"
-              stroke={arc.color}
-              strokeWidth="1"
-              strokeDasharray="1200"
-              opacity="0.3"
-              style={{
-                animation: `pulseArc ${arc.duration}s ${arc.delay + 0.5}s ease-in-out infinite`,
-              }}
-            />
-          </g>
-        ))}
-      </svg>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   HeroSection – All 5 animation layers combined
-────────────────────────────────────────────── */
 export default function HeroSection() {
   return (
     <section
@@ -146,6 +54,9 @@ export default function HeroSection() {
         />
       </div>
 
+      {/* ── LAYER 3: Energy Field ── */}
+      <EnergyField />
+
       {/* ── LAYER 2: Floating Glass Shapes ── */}
       <div
         className="absolute inset-0 overflow-hidden pointer-events-none"
@@ -192,24 +103,6 @@ export default function HeroSection() {
           }}
         />
       </div>
-
-      {/* ── LAYER 3: Energy Field SVG Arcs ── */}
-      <EnergyFieldSVG />
-
-      {/* ── LAYER 4: Very faint static arc decoration (bottom-right) ── */}
-      <svg
-        className="absolute bottom-0 right-0 pointer-events-none"
-        style={{ opacity: 0.06, zIndex: 1 }}
-        width="600"
-        height="400"
-        viewBox="0 0 600 400"
-        fill="none"
-        aria-hidden="true"
-      >
-        <ellipse cx="580" cy="420" rx="340" ry="200" stroke="#a78bfa" strokeWidth="1" />
-        <ellipse cx="580" cy="420" rx="260" ry="150" stroke="#a78bfa" strokeWidth="0.8" />
-        <ellipse cx="580" cy="420" rx="180" ry="100" stroke="#a78bfa" strokeWidth="0.6" />
-      </svg>
 
       {/* ── LAYER 5: Content with Framer Motion text animations ── */}
       <div className="container-custom relative pt-28 pb-36" style={{ zIndex: 10 }}>
@@ -353,6 +246,6 @@ export default function HeroSection() {
 
         </div>
       </div>
-    </section>
+    </section >
   );
 }
